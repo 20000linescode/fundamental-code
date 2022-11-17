@@ -1,6 +1,6 @@
 # fundamental-code
 C语言日常基础
-#include<stdio.h>
+#include<stdio.h>//if的多重语句
 int main()
 {
 	/*int age=55;
@@ -10,7 +10,7 @@ int main()
 	else  printf("老年\n");
 	return 0;*/
 }
-#include<stdio.h>
+#include<stdio.h>//
 int main()
 {
 	int a=0,b=1;
@@ -150,6 +150,23 @@ int main()
 	for(i=1;i<=n;i++)
 	{
 		sum*=i;
+	}
+	printf("%d\n",sum);
+	return 0;
+}
+#include<stdio.h>//计算1到10的阶乘的和
+int main()
+{
+	int i,j,sum=0;
+	int ret=1;
+	for(i=1;i<=10;i++)
+	{
+		ret=1;//每次计算完后将ret重新赋值为1
+		for(j=1;j<=i;j++)
+		{
+			ret=ret*j;
+		}
+		sum=ret+sum;
 	}
 	printf("%d\n",sum);
 	return 0;

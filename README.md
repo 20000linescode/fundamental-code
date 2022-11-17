@@ -64,7 +64,7 @@ int main()
 	putchar(ch);
 	return 0;
 }
-#include<stdio.h>
+#include<stdio.h>//减少空格之类对下一个getchar的影响，使用了一个while循环
 int main()
 {
 	int ret =0;
@@ -82,7 +82,7 @@ int main()
 	else printf("放弃确认\n");
     return 0;
 }
-#include<stdio.h>
+#include<stdio.h>//只输出0到9的ASCII码
 int main()
 {
 	int ch=0;
@@ -95,7 +95,7 @@ int main()
 	return 0;
 }
 }
-#include<stdio.h>
+#include<stdio.h>//for循环里改变变量值产生死循环
 int main()
 {
 	int i=0;
@@ -107,7 +107,7 @@ int main()
 	}
 	return 0;
 }
-#include<stdio.h>
+#include<stdio.h.>//缺少j=0代码只循环十次
 int main()
 {
 	int i=0,j=0;
@@ -118,7 +118,7 @@ int main()
 	}
 	return 0;
 }
-#include<stdio.h>
+#include<stdio.h>//K=0不执行
 int main()
 {
 	int i=0,k=0;
@@ -128,7 +128,7 @@ int main()
 	
 	return 0;
 }
-#include<stdio.h>
+#include<stdio.h>//死循环
 int main()
 {
 	int i=1;
@@ -142,7 +142,7 @@ int main()
 		return 0;
 
 }
-#include<stdio.h>
+#include<stdio.h>//计算n的阶乘
 int main()
 {
 	int n,i,sum=1;

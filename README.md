@@ -258,3 +258,76 @@ int main()
 	}
 	return 0;
 }
+#include<stdio.h>
+int main()
+{
+	char password[20]={0};
+	int i=0;
+	//printf("请输入密码:>");
+	for(i=0;i<3;i++)
+	{
+		printf("请输入密码:>");
+		scanf("%s",password);
+		if(password=="123456")
+	   { 
+		   printf("登录成功\n");
+		   break;
+	   }
+		else                  
+		{
+			printf("密码错误，请重新输入\n");
+		}
+	}
+	if(i==3) printf("密码错误三次，不可继续输入\n");
+	return 0;
+}
+#include<stdio.h>
+#include<string.h>
+int main()
+{
+	char password[20]={0};
+	int i=0;
+	for(i=0;i<3;i++)
+	{
+		printf("请输入密码:>");
+		scanf("%s",password);
+		if(strcmp(password,"123456")==0)//若相等则返回0
+	   { 
+		   printf("登录成功\n");
+		   break;
+	   }
+		else                  
+		{
+			printf("密码错误，请重新输入\n");
+		}
+	}
+	if(i==3) printf("密码错误三次，不可继续输入\n");
+	return 0;
+}
+#include<stdio.h>//输入三个数并且由大到小排列
+int main()
+{
+	int x,y,z,tmp;
+	scanf("%d %d %d",&x,&y,&z);
+	if(x<y) 
+	{
+		tmp=x;
+		x=y;
+		y=tmp;
+	}
+	if(x<z)
+	{
+		tmp=x;
+		x=z;
+		z=tmp;
+	}
+	if(y<z)
+	{
+		tmp=y;
+		y=z;
+		z=tmp;
+	}
+    printf("%d,%d,%d",x,y,z);
+
+		return 0;
+}

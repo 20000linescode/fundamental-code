@@ -171,3 +171,90 @@ int main()
 	printf("%d\n",sum);
 	return 0;
 }
+#include<stdio.h>//输入一个小写字母，输出一个大写字母，并且输出他的ASCII码值。
+int main()
+{
+	char ch;
+	printf("请输入一个小写字母:");
+
+	ch=	getchar();
+	if(ch<'a'||ch>'z') 
+	{printf("请重新输入\n");}
+	else {putchar(ch-32);
+	printf(" %d\n",ch-32);}
+	return 0;
+}
+#include<stdio.h>//二分查找法
+int main()
+{
+	int n;
+	int arr[]={1,2,3,4,5,6,7,8,9,10};
+	int sz=sizeof(arr)/sizeof(arr[0]);//计算数组元数个数
+	int left=0,right=sz-1;//赋予左右下标的大小
+	//int mid=(left+right)/2;
+	printf("输入要查找到的0-10的数:");
+	scanf("%d",&n);
+	while(left<=right)
+  {
+	int mid=(left+right)/2;
+	if(arr[mid]<n) 
+	{
+		left=mid+1;
+	}
+	else if(arr[mid]>n)
+	{
+		right=mid-1;
+	}
+	else 
+	{
+		printf("找到了,下标是:%d\n",mid);
+		break;
+	}
+  }
+    if(left>right)
+		{
+			printf("找不到\n");
+	    }
+			return 0;
+}
+#include<stdio.h>
+#include<string.h>
+int main()
+{
+	char arr1[]={"Welcome to bit!!!!"};
+	char arr2[]={"##################"};
+	int left=0;
+	int right=strlen(arr1);//sizeof(arr1);
+	//printf("%d\n",sizeof(arr1));
+	//printf("%d\n",sizeof(arr2));
+	//printf不如strlen
+    while(left<=right)
+	{
+		arr2[left++]=arr1[left++];
+		arr2[right--]=arr1[right--];
+		printf("%s\n",arr2);
+	}
+	return 0;
+}
+#include<stdio.h>
+#include<string.h>
+#include<Windows.h>
+#include<stdlib.h>
+int main()
+{
+	char arr1[]={"Welcome to bit!!!!"};
+	char arr2[]={"##################"};
+	int left=0;
+	int right=strlen(arr1);
+    while(left<=right)
+	{
+		arr2[left]=arr1[left];
+		arr2[right]=arr1[right];
+		printf("%s\n",arr2);
+		Sleep(1000);
+		system("cls");
+		left++;
+		right--;
+	}
+	return 0;
+}

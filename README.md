@@ -459,3 +459,29 @@ int main()
 
 	return 0;
 }
+#include<stdio.h>//从1+1/2+1/3+...+1/100
+int main()
+{
+	int i;
+	double sum=0.0;
+	for(i=1;i<=100;i++)
+	{
+		sum+=1.0/i;
+	}	
+	printf("%lf\n",sum);
+	return 0;
+}
+#include<stdio.h>//从1-1/2+1/3+...-1/100;
+int main()
+{
+	int i;
+	int flag=1;
+	double sum=0.0;
+	for(i=1;i<=100;i++)
+	{
+		sum+=flag*1.0/i;
+		flag=-flag;
+	}	
+	printf("%lf\n",sum);
+	return 0;
+}

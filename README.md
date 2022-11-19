@@ -331,3 +331,131 @@ int main()
 
 		return 0;
 }
+#include<stdio.h>//输出1-100中3的倍数
+int main()
+{
+	int i;
+	for(i=1;i<=100;i++)
+	{
+		if((i%3)==0)
+			printf("%d ",i);
+	}
+	return 0;
+}
+#include<stdio.h>//求两个数的最大公约数
+int main()
+{
+	int a,b,r=0;
+	printf("输入a,b的值:>");
+	scanf("%d %d",&a,&b);
+	while(a%b) //a%b为真即不等于0，所以输入数字不需要区分大小
+	{
+		r=a%b;//可以直接改成while(r=a%b)省略这一行
+		a=b;
+		b=r;
+	}
+	printf("%d\n",b);
+	return 0;
+}
+#include<stdio.h>//打印1000--2000的闰年
+int main()
+{
+	int year=0;//闰年条件，1.能被4整除并且不能被100整除
+	                     //2.能被400整除。只要满足上面两个其中一个即是闰年。
+    int count=0;
+	for(year=1000;year<=2000;year++)
+	{
+		if((year%4==0)&&(year%100!=0))
+		{	printf("%d ",year);
+		  count++;
+		}
+		else if(year%400==0)
+		{
+			printf("%d ",year);
+			count++;
+		}
+	}
+	printf("\n %d\n",count);
+	return 0;
+}
+#include<stdio.h>
+int main()
+{
+	int year=0;
+	int count=0;
+	for(year=1000;year<=2000;year++)
+	{
+		if(((year%4==0)&&(year%100!=0))||year%400==0)
+		{   
+			printf("%d ",year);
+		    count++;
+		}
+	}
+printf("\n %d\n",count);
+        return 0;
+}
+#include<stdio.h>//求100-200中的素数，并且打印出来，计算其总个数。
+int main()
+{
+	int i=0,j=0,count=0;
+	for(i=100;i<=200;i++)
+	{
+		for(j=2;j<i;j++)
+		{
+			if(i%j==0)
+			break;
+		}
+	    if(i==j)
+		{
+			printf("%d ",i);
+			count++;
+		}
+	}
+			printf("\n %d\n",count);
+
+	return 0;
+}
+#include<stdio.h>//依然是求素数，改进了算法,使用了开平方减少运算量。
+#include<math.h>
+int main()
+{
+	int i=0,j=0,count=0;
+	for(i=100;i<=200;i++)
+	{
+		for(j=2;j<=sqrt(i);j++)
+		{
+			if(i%j==0)
+			break;
+		}
+	    if(j>sqrt(i))
+		{
+			printf("%d ",i);
+			count++;
+		}
+	}
+			printf("\n %d\n",count);
+
+	return 0;
+}
+#include<stdio.h>//依然是求素数，改进了算法,使用了开平方减少运算量并且偶数不可能是素数使用了i+=2。
+#include<math.h>
+int main()
+{
+	int i=0,j=0,count=0;
+	for(i=101;i<=200;i+=2)
+	{
+		for(j=2;j<=sqrt(i);j++)
+		{
+			if(i%j==0)
+			break;
+		}
+	    if(j>sqrt(i))
+		{
+			printf("%d ",i);
+			count++;
+		}
+	}
+			printf("\n %d\n",count);
+
+	return 0;
+}

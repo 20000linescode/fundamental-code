@@ -485,3 +485,129 @@ int main()
 	printf("%lf\n",sum);
 	return 0;
 }
+#include<stdio.h>//求十个整数中的最大值;
+int main()
+{
+	int arr[]={1,2,3,4,5,6,7,8,9,10,};
+	int i,max=arr[0];//max应该为数组中的数，而不应该是直接赋值，可能数组中还有负数
+	int sz=sizeof(arr)/sizeof(arr[0]);
+	for(i=0;i<sz;i++)
+	{
+		if(arr[i]>max)
+			max=arr[i];
+	}
+	printf("%d\n",max);
+	return 0;
+}
+#include<stdio.h>//打印九九乘法表
+int main()
+{
+	int i=0,j=0,sum=0;
+	for(i=1;i<10;i++)
+	{
+		for(j=1;j<=i;j++)
+		{
+			sum=i*j;
+			printf("%d*%d=%-2d ",i,j,sum);
+		}
+		printf("\n");
+	}
+	return 0;
+}
+#include<stdio.h>//猜数字游戏
+#include<stdlib.h>
+#include<time.h>
+void game()
+{
+	int guess;
+	int ret=0;
+	//srand((unsigned int)time(NULL));//使()中的数一直发生变化,使用时间戳，因为时间一直在变化。
+	//NULL为空指针
+	ret=rand()%100+1;//产生随机数0到RAND_MAX=0x7fff=32767.%100以后生成0-99的随机数
+	//RAND_MAX=0x7fff
+	//printf("%d\n",ret);这里是产生的随机数的值
+	while(1)//2.猜数字，没猜对就一直猜，猜对了break，跳出循环。
+	{
+		printf("输入猜的数字\n");
+		scanf("%d",&guess);
+		if(guess>ret)
+		{
+			printf("猜大了\n");
+		}
+		else if(guess<ret)
+		{
+			printf("猜小了\n");
+		}
+		else
+		{
+			printf("恭喜你，猜对了\n");
+			break;
+		}
+	}
+}
+void menu()
+{
+	printf("******************\n");
+    printf("**1.play 0.exit **\n");
+	printf("******************\n");
+
+}
+int main()
+{
+	int input=0;
+	srand((unsigned int)time(NULL));//使()中的数一直发生变化,使用时间戳，因为时间一直在变化。
+	//NULL为空指针
+
+	do
+	{
+		menu();//菜单函数
+		printf("请选择>:");
+		scanf("%d",&input);
+		switch(input)
+		{
+case 1: 
+			game();//猜数字游戏的一个函数
+			break;
+case 0:
+			printf("退出游戏\n");
+			break;
+default:
+			printf("选择错误\n");
+			break;
+		}
+
+	}while(input);//若为1进入循环，为0结束循环，其他的数字进入default输出选择错误。非常巧妙。
+
+	return 0;
+}
+#include<stdio.h>//goto的简单用法。
+int main()
+{
+	goto again;
+	printf("aaa\n");
+	again:
+	printf("hhh\n");
+	return 0;
+}
+#include<stdio.h>//60s内关机的程序
+#include<string.h>
+#include<windows.h>
+#include<stdlib.h>
+int main()
+{
+	char input[]={0};
+	again:
+	printf("请输入666，不然你的电脑将在60s后关机\n");
+	scanf("%s",input);
+	system("shutdown -s -t 60");
+	if(strcmp(input,"666"))//比较字符串
+	{
+		system("shutdown -a");
+	}
+	else
+	{
+		printf("输入错误\n");
+		goto again;
+	}
+	return 0;
+}

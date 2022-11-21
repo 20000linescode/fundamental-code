@@ -611,3 +611,227 @@ int main()
 	}
 	return 0;
 }
+#include<stdio.h>//求十个整数中的最大值;
+int main()
+{
+	int arr[]={1,2,3,4,5,6,7,8,9,10,};
+	int i,max=arr[0];//max应该为数组中的数，而不应该是直接赋值，可能数组中还有负数
+	int sz=sizeof(arr)/sizeof(arr[0]);
+	for(i=0;i<sz;i++)
+	{
+		if(arr[i]>max)
+			max=arr[i];
+	}
+	printf("%d\n",max);
+	return 0;
+}
+#include<stdio.h>//打印九九乘法表
+int main()
+{
+	int i=0,j=0,sum=0;
+	for(i=1;i<10;i++)
+	{
+		for(j=1;j<=i;j++)
+		{
+			sum=i*j;
+			printf("%d*%d=%-2d ",i,j,sum);
+		}
+		printf("\n");
+	}
+	return 0;
+}
+#include<stdio.h>//猜数字游戏
+#include<stdlib.h>
+#include<time.h>
+void game()
+{
+	int guess;
+	int ret=0;
+	//srand((unsigned int)time(NULL));//使()中的数一直发生变化,使用时间戳，因为时间一直在变化。
+	//NULL为空指针
+	ret=rand()%100+1;//产生随机数0到RAND_MAX=0x7fff=32767.%100以后生成0-99的随机数
+	//RAND_MAX=0x7fff
+	//printf("%d\n",ret);这里是产生的随机数的值
+	while(1)//2.猜数字，没猜对就一直猜，猜对了break，跳出循环。
+	{
+		printf("输入猜的数字\n");
+		scanf("%d",&guess);
+		if(guess>ret)
+		{
+			printf("猜大了\n");
+		}
+		else if(guess<ret)
+		{
+			printf("猜小了\n");
+		}
+		else
+		{
+			printf("恭喜你，猜对了\n");
+			break;
+		}
+	}
+}
+void menu()
+{
+	printf("******************\n");
+    printf("**1.play 0.exit **\n");
+	printf("******************\n");
+
+}
+int main()
+{
+	int input=0;
+	srand((unsigned int)time(NULL));//使()中的数一直发生变化,使用时间戳，因为时间一直在变化。
+	//NULL为空指针
+
+	do
+	{
+		menu();//菜单函数
+		printf("请选择>:");
+		scanf("%d",&input);
+		switch(input)
+		{
+case 1: 
+			game();//猜数字游戏的一个函数
+			break;
+case 0:
+			printf("退出游戏\n");
+			break;
+default:
+			printf("选择错误\n");
+			break;
+		}
+
+	}while(input);//若为1进入循环，为0结束循环，其他的数字进入default输出选择错误。非常巧妙。
+
+	return 0;
+}
+#include<stdio.h>//goto的简单用法。
+int main()
+{
+	goto again;
+	printf("aaa\n");
+	again:
+	printf("hhh\n");
+	return 0;
+}
+#include<stdio.h>
+#include<string.h>
+#include<windows.h>
+#include<stdlib.h>
+int main()
+{
+	char input[]={0};
+	again:
+	printf("请输入我是猪，不然你的电脑将关机\n请输入:>\n");
+	scanf("%s",input);
+	system("shutdown -s -t 60");
+	if(strcmp(input,"我是猪"))
+	{
+		system("shutdown -a");
+	}
+	else
+	{
+		printf("输入错误\n");
+		goto again;
+	}
+	return 0;
+}
+#include<stdio.h>
+#include<string.h>
+int main()
+{
+    char arr1[]="abc";
+	char arr2[20]="#####";
+	strcpy(arr2,arr1);
+	printf("%s\n",arr2);
+	return 0;
+}
+#include<stdio.h>
+#include<string.h>
+int main()
+{
+	char arr[]="abc";
+	memset(arr,'*',2);
+	printf("%s\n",arr);
+	return 0;
+}
+
+#include<stdio.h>
+void Swap1(int* pa,int* pb)
+{
+	int tmp=0;
+	tmp=*pa;
+	*pa=*pb;
+	*pb=tmp;
+}
+int main()
+{
+	int num1=10;
+	int num2=20;
+	Swap1( &num1,&num2 );
+	printf("%d,%d",num1,num2);
+	return 0;
+}
+#include<stdio.h>//用函数输出100-200之间的素数
+int is_prime(int n)
+{
+	int j=0;
+	for(j=2;j<n;j++)
+	{
+		if(n%j!=0)
+			return 1;
+		else
+			return 0;
+	}
+}
+int main()
+{
+	int i=0;
+	for(i=100;i<=200;i++)
+	{
+		if(is_prime(i)==1)
+			printf("%d ",i);
+	}
+	if(is_prime(i)==1)
+	return 0;
+}
+#include<stdio.h>//用函数输出100-200之间的素数
+int is_prime(int n)
+{
+	int j=0;
+	for(j=2;j<n;j++)
+	{
+		if(n%j==0)
+			return 0;
+	}
+	return 1;
+}
+int main()
+{
+	int i=0;
+	for(i=100;i<=200;i++)
+	{
+		if(is_prime(i)==1)
+			printf("%d ",i);
+	}
+	if(is_prime(i)==1)
+	return 0;
+}
+#include<stdio.h>//用函数求闰年
+int is_leap_year(int x)
+{
+	if((x%4==0&&x%100!=0)||(x%400==0))
+		return 1;
+}
+int main()
+{
+	int year=0;
+	int count=0;
+	for(year=1000;year<=2000;year++)
+	{
+		if(is_leap_year(year)==1) 
+			printf("%d ",year);
+	}
+	return 0;
+}

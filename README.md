@@ -835,3 +835,80 @@ int main()
 	}
 	return 0;
 }
+#include<stdio.h>
+int binary_search(int arr[],int k,int sz)//数组的传递；
+{
+	int left=0;
+	int right=sz-1;
+	int i=0;
+	//int mid=(left+right)/2;
+	while(left<=right)
+	{
+		int mid=(left+right)/2;
+		if(arr[mid]<k)
+			{
+				left=mid+1;
+		    }
+	else if(arr[mid]>k)
+	 {
+		right=mid-1;
+	 }
+		else 
+		{
+			return mid;
+	    }
+	}
+	return -1;
+}
+int main()
+{
+	int k=7;//7为要找的元素，我们返回7的下标；
+	int arr[]={1,2,3,4,5,6,7,8,9,10};
+	int sz=sizeof(arr)/sizeof(arr[0]);
+	int ret=binary_search(arr,k,sz);
+	printf("%d\n",ret);
+	return 0;
+}
+#include<stdio.h>//调用一次num加1
+void Add(int* p)
+{
+	(*p)++;
+}
+int main()
+{
+	int num=0;
+	Add(&num);
+	printf("%d\n",num);
+	Add(&num);
+	printf("%d\n",num);
+	Add(&num);
+	printf("%d\n",num);
+	return 0;
+}
+#include<stdio.h>
+int main()
+{
+	printf("%d",printf("%d",printf("%d",43)));
+	return 0;
+}
+#include<stdio.h>
+int Add(int a,int b);
+int main()
+{
+	int a=10,b=20;
+	int sum=Add(a,b);
+	printf("%d\n",sum);
+	return 0;
+}
+int Add(int a,int b )
+{
+	int z=a+b;
+	return z;
+}
+#include<stdio.h>
+int main()
+{
+	printf("hhh\n");
+	main();
+	return 0;
+}

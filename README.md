@@ -912,3 +912,133 @@ int main()
 	main();
 	return 0;
 }
+#include<stdio.h>
+void print(int n)
+{
+    if(n>9)
+	{
+		print(n/10);
+	}
+	printf("%d ",n%10);
+}
+int main()
+{
+	int n=1234;
+	unsigned int ret=0;
+	//scanf("%d\n",&n);
+	print(n);
+	return 0;
+}
+#include<stdio.h>//函数代替strlen.
+int my_strlen(char* arr)
+{
+	int count=0;
+	while(arr!=0)
+	{
+		arr++;
+		count++;
+	}
+	return count;
+}
+int main()
+{
+	char arr[]="abc";
+	int len=my_strlen(arr);
+	printf("%d\n",len);
+	return 0;
+}
+#include<stdio.h>//不创建变量，用递归求字符串长度；
+int my_strlen(char* arr)
+{
+	if (*arr!='\0')//使用解引用操作符，得到arr中的内容；
+        return 1+my_strlen(arr+1);//递归运行得到的应该是1+1+1+0=3；
+	else                          //一直到\0停止调用
+        return 0;
+}
+int main()
+{
+	char arr[]="abc";
+	int len=my_strlen(arr);
+	printf("len=%d\n",len);//主函数调用一次
+	return 0;
+}
+#include<stdio.h>//递归求阶乘，但是要注意是否会溢出；
+int Fac1(int n)
+{
+	if(n<=1)
+		return 1;
+	else
+		return n*Fac1(n-1);
+}
+int main()
+{
+	int n=0;
+	int ret;
+	scanf("%d",&n);
+	 ret=Fac1(n);
+	printf("%d\n",ret);
+	return 0;
+}
+#include<stdio.h>//求第n个斐波那契数的值,使用函数
+int Fib(int n)
+{
+	int a=1;
+	int b=1;
+	int c=1;
+	while(n>2)
+	{
+		c=a+b;
+		a=b;
+		b=c;
+		n--;
+	}
+    return c;
+}
+int main()
+{
+	int ret=0;
+	int n=0;
+	scanf("%d",&n);
+	ret=Fib(n);
+	printf("%d\n",ret);
+	return 0;
+}
+#include<stdio.h>//求第n个斐波那契数的值,使用递归；
+int Fib(int n)
+{
+	if(n<=2) return 1;
+	else return Fib(n-1)+Fib(n-2);
+}
+int main()
+{
+	int ret=0;
+	int n=0;
+	scanf("%d",&n);
+	ret=Fib(n);
+	printf("%d\n",ret);
+	return 0;
+}
+#include<stdio.h>
+int main()
+{
+   int x=0,y=0,sum=0;
+   scanf("%d %d",&x,&y);
+   sum=x+y;
+   printf("%d\n",sum);
+   return 0;
+}
+#include<stdio.h>
+int main()
+{
+	double Sn=0;
+	int k=1;
+	int n=1;
+	scanf("%d",&k);
+	while(Sn<=k)
+	{
+		Sn=Sn+1.0/n;
+		n++;
+	}
+	printf("%d\n",n-1);
+	return 0;
+}

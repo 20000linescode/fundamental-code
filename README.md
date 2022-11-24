@@ -1042,3 +1042,123 @@ int main()
 	printf("%d\n",n-1);
 	return 0;
 }
+#include<stdio.h>
+#include<string.h>
+int main()
+{
+	char arr[10]="abcdef";
+	char arr1[]="abc";
+	char arr2[]={'a','b','c'};
+	printf("%d\n",sizeof(arr));
+	printf("%d\n",strlen(arr));
+	printf("%d\n",sizeof(char));
+	printf("%d\n",sizeof(arr1));
+	printf("%d\n",sizeof(arr2));
+	printf("%d\n",strlen(arr1));
+	printf("%d\n",strlen(arr2));
+	return 0;
+}
+#include<stdio.h>
+int main()
+{
+	int i=0;
+	int arr[]={1,2,3,4,5,6,7,8,9,10};
+	for(i=0;i<10;i++)
+	{
+		printf("&arr[%d]=%p\n",i,&arr[i]);
+	}
+	return 0;
+}
+#include<stdio.h>
+int main()
+{
+	int i=0,j=0;
+	int arr[3][4];
+	for(i=0;i<3;i++)
+	{
+		for(j=0;j<4;j++)
+		{
+			printf("arr[%d][%d],%p\n",i,j,&arr[i][j]);
+		}
+	}
+	return 0;
+}
+#include<stdio.h>//冒泡排序,升序；可以使用任意数组的数进行排序；
+void bubble_sort (int arr[],int sz)
+{
+	int i=0,j=0;
+	//for(i=0;i<sz-1;i++)//控制交换的次数
+	//{
+		for(j=0;j<sz-i-1;j++)
+		{
+
+			if(arr[j]>arr[j+1])//比较arr[j]与arr[j+1],较大就交换。
+			{                  //交换二者的值千万别错了
+							int tmp=arr[j+1];
+							arr[j+1]=arr[j];
+							arr[j]=tmp;
+							i++;
+			}
+
+		}
+	//}
+}
+	int main()
+{
+	int sz=0,i=0;
+	int arr[]={10,9,8,7,6,5,4,3,2,1};
+	sz=sizeof(arr)/sizeof(arr[0]);
+	bubble_sort(arr,sz);
+	for(i=0;i<sz;i++)
+	{
+		printf("%d ",arr[i]);
+	}
+	return 0;
+}
+#include<stdio.h>//输入十个整数，再输入一个数加30
+int main()       //输出比那个数小的十个整数中的数
+{
+	int i=0,count=0;
+	int n=0;
+	int arr[10]={0};
+	for(i=0;i<10;i++)
+	{
+			scanf("%d",&arr[i]);
+	}
+	scanf("%d",&n);
+	for(i=0;i<10;i++)
+	{
+		if(arr[i]<=(n+30))//注意小于等于
+			count++;
+	}
+	printf("%d\n",count);
+	return 0;
+
+#include<stdio.h>//0表示该树未砍，1表示砍了（校门外的树）
+int main()
+{
+	
+	int l=0,m=0;//l为树的总数，m为区域数。
+	int i=0,j=0;
+	int count=0;
+	int arr1[10001]={0};//存放马路长度
+	int arr2[2]={0};//存放区域的起始点和终止点的坐标
+	scanf("%d %d",&l,&m);//输入马路长度和区域数
+	for(i=0;i<m;i++)//以区域数控制输入起始点和终止点的坐标的个数
+	{
+	   for(j=0;j<2;j++)//循环一次放入区域的起始点和终止点的坐标
+       scanf("%d",&arr2[j]);
+	   for(j=0;j<=l;j++)//直接使用区域的起始点和终止点的坐标进行比较赋值1
+	   {
+		   if(j<=arr2[1]&&j>=arr2[0])//这样赋值可以覆盖
+			   arr1[j]=1;
+	   }
+	}
+	for(i=0;i<=l;i++)//注意i<=1因为l为树的总数，若无等于号则会少一颗树
+	{
+		if(arr1[i]==0)//求未砍的树
+			count++;
+	}
+	printf("%d\n",count);
+	return 0;
+}

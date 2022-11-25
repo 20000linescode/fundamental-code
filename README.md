@@ -1162,3 +1162,53 @@ int main()
 	printf("%d\n",count);
 	return 0;
 }
+#include<stdio.h>//冒泡排序,升序；可以使用任意数组的数进行排序；
+void bubble_sort (int arr[],int sz)
+{
+	int i=0,j=0;
+    int flag=1;
+	for(i=0;i<sz-1;i++)//控制交换的次数
+	{
+		flag=1;//每进入循环一次就给flag重新初始化
+		for(j=0;j<sz-i-1;j++)//冒泡一次
+		{
+
+			if(arr[j]>arr[j+1])//比较arr[j]与arr[j+1],较大就交换。
+			{                  //交换二者的值千万别错了
+							int tmp=arr[j+1];
+							arr[j+1]=arr[j];
+							arr[j]=tmp;
+							flag=0;
+			}
+
+		}//一次冒泡完成跳出循环，进行比较，若if未执行则再进行第二次冒泡，
+		          if(flag==1)//若执行了if跳出最外层for循环，说明已经有序不需要再进行比较，减少了计算时间
+	          {
+		          break;
+	          }
+	}
+}
+	int main()
+{
+	int sz=0,i=0;
+	int arr[]={1,2,3,4,5,6,7,8,10,9};
+	sz=sizeof(arr)/sizeof(arr[0]);
+	bubble_sort(arr,sz);
+	for(i=0;i<sz;i++)
+	{
+		printf("%d ",arr[i]);
+	}
+	return 0;
+}
+#include<stdio.h>
+int main()
+{
+	int arr[]={1,2,3,4,5,6,7};
+	printf("%p\n",arr);
+	printf("%p\n",arr+1);
+	printf("%p\n",&arr[0]);
+	printf("%p\n",&arr[0]+1);
+	printf("%p\n",&arr);
+	printf("%p\n",&arr+1);
+	return 0;
+}

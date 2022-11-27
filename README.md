@@ -1212,3 +1212,184 @@ int main()
 	printf("%p\n",&arr+1);
 	return 0;
 }
+
+
+//test.c
+#include"game.h"
+void menu()
+{
+	printf("******************\n");
+	printf("**1.play  0.exit**\n");
+	printf("******************\n");
+}
+void game()
+{
+	char mine[ROWS][COLS]={0};//存放雷的信息
+	char show[ROWS][COLS]={0};//显示雷的信息
+	//初始化棋盘
+	InitBoard(mine,ROWS,COLS,'0');//这个是非常细节的传过去的是0，
+	InitBoard(show,ROWS,COLS,'*');//这个初始化为*
+	//打印棋盘
+	//DisplayBoard(mine,ROW,COL);
+	DisplayBoard(show,ROW,COL);
+	//放入雷
+	SetMine(mine,ROW,COL);
+	DisplayBoard(mine,ROW,COL);
+	//排查雷
+	FindMine(mine,show,ROW,COL);
+}
+void test()
+{
+	int input=0;
+	srand((unsigned int)(time(NULL)));
+	do
+	{
+		menu();
+		printf("请选择:>");
+        scanf("%d",&input);
+        switch(input)
+		{
+		case 0:
+			{
+				printf("退出游戏\n");
+				break;
+			}
+		case 1:
+			{
+				game();
+				break;
+			}
+		default:
+			{
+				printf("输入错误，请重新选择\n");
+				break;
+			}
+		}
+	}
+	while(input);
+}
+int main()
+{
+	test();
+	return 0;
+}
+
+//game.c
+//实现9*9的棋盘要使用11*11的棋盘存放，每个棋盘就是一个char型数组
+//一个棋盘存放雷的信息，一个存放显示雷的信息，0表示没有雷，1表示有雷
+//显示雷信息的数字表示该数字周围有多少个雷
+#include "game.h"
+static int get_mine_count(char mine[ROWS][COLS],int x,int y)//得到（x,y）坐标周围雷个数
+{
+	return mine[x-1][y]+//将坐标（x,y）周围的八个字符类型元素加起来减去8个字符0得到就是返回的雷个数
+		mine[x-1][y-1]+
+		mine[x][y-1]+
+		mine[x+1][y-1]+
+		mine[x+1][y]+
+		mine[x+1][y+1]+
+		mine[x][y+1]+
+		mine[x-1][y+1]-8 * '0';
+}
+void InitBoard(char board[ROWS][COLS],int rows,int cols,char set)//将game.h中的两个函数结合为一个函数，传入参数的不同那么
+{                                                                //初始化的值不同，两个函数分别调用同一个初始化函数
+	int i=0,j=0;
+	for(i=0;i<rows;i++)
+	{
+		for(j=0;j<cols;j++)
+		{
+			board[i][j]=set;//不用加'set',不然直接报错
+		}
+	}
+}
+void DisplayBoard(char board[ROWS][COLS],int row,int col)//棋盘不够好，不能准确找到行和列
+{
+	int i=0,j=0;
+	printf("-----扫雷游戏-----\n");
+    for(i=0;i<=col;i++)
+	{
+		printf("%d ",i);
+	}
+	printf("\n");
+	for(i=1;i<=row;i++)
+	{
+		printf("%d ",i);
+		for(j=1;j<=col;j++)
+		{
+			printf("%c ",board[i][j]);
+ 		}
+		printf("\n");
+	}
+	printf("-----扫雷游戏-----\n");
+
+}
+void SetMine(char mine[ROWS][COLS],int row,int col)
+{
+	//布置十个雷，布置一个count-1当count=0使停止循环
+	int count=10;
+	while(count)
+		{
+			int x=rand()%row+1;//产生的x,y坐标应该在1-9之间%9余数在0-8之间加1就在1-9之间
+			int y=rand()%col+1;//若%10则产生0-9之间，不满足效果
+			//判断是否放雷，无雷才能放入
+			if(mine[x][y]=='0')
+			{
+				mine[x][y]='1';
+				count--;
+			}
+		}
+}
+//排查雷，1输入雷的坐标 2.检查雷数量
+void FindMine(char mine[ROWS][COLS],char show[ROWS][COLS],int row,int col)
+{
+	int count=0;
+	int x=0,y=0;
+	printf("请输入所要排查的坐标:>");
+    scanf("%d%d",&x,&y);//x>=1&&x<=row
+	while(1)
+  {
+		if(x>=1 && x<=row && y>=1 && y<=col)
+	{
+		if(mine[x][y]=='1')
+		{
+			printf("很遗憾，你被炸死了\n");
+			DisplayBoard(mine,row, col);//打印棋盘，让玩家看到怎么被炸死的，调用函数
+			break;
+		}
+		else
+		{
+			//写一个函数统计雷的个数
+			count=get_mine_count(mine,x,y); 
+			show[x][y]=count+'0';      //拿到了数组周围有几个雷返回的count放入show数组表示周围的雷数量
+		    DisplayBoard(show,row,col);//为什么要加‘0’，因为返回的count是数字，而加上‘0’才是字符，而show数组是char类型
+		}                        
+	}
+	else
+	{
+		printf("坐标不合法，请重新输入");
+	}
+  }
+	
+}
+
+
+//game.h
+#define _CRT_SECURE_NO_WARNINGS 1
+#include<stdio.h>
+#include<stdlib.h>
+#include<time.h>
+#define ROW 9
+#define COL 9
+#define ROWS ROW+2
+#define COLS COL+2
+//初始化棋盘的函数
+void InitBoard(char board[ROWS][COLS],int rows,int cols,char set);//非雷为0，否则为1
+//void InitBoard(char show[ROWS][COLS],int rows,int cols,char set);//非雷为*，否则为#
+//打印函数
+void DisplayBoard(char board[ROWS][COLS],int row,int col);//传递的是11*11的棋盘，所以行与列传递的是9*9
+//void DisplayBoard(char show[ROWS][COLS],int row,int col);//两个函数同时调用一个
+//设置雷
+void SetMine(char mine[ROWS][COLS],int row,int col);
+//排雷
+void FindMine(char mine[ROWS][COLS],char show[ROWS][COLS],int row,int col);
+//统计坐标周围有几个雷的函数
+//int get_mine_count(char mine[ROWS][COLS],int x,int y);//该函数无需声明

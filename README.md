@@ -1393,3 +1393,124 @@ void SetMine(char mine[ROWS][COLS],int row,int col);
 void FindMine(char mine[ROWS][COLS],char show[ROWS][COLS],int row,int col);
 //统计坐标周围有几个雷的函数
 //int get_mine_count(char mine[ROWS][COLS],int x,int y);//该函数无需声明
+#include<stdio.h>
+int main()
+{
+	int b=-1;
+	int a=b<<1;
+	printf("%d\n",a);
+	return 0;
+}
+#include<stdio.h>
+int main()
+{
+	int a=5,b=3;
+	//101
+	//011
+	int c=a&b;
+	int d=a|b;
+	int e=a^b;
+	printf("%d\n%d\n%d\n",c,d,e);
+	return 0;
+}
+//方法1，加减法
+#include<stdio.h>//不创建变量换a,b的值,a,b可以是任意数
+int main()  
+{                     
+	int a=5;
+	int b=3;
+	a=a+b;//该代码有缺陷，如果a,b两个数相加超过了int型能够储存的范围，则会溢出。
+	b=a-b;
+	a=a-b;
+}
+//方法2，异或
+#include<stdio.h>
+int main()
+{
+	int a=5,b=3;
+	//a=101
+	//b=011
+	a=a^b;//a=110
+	b=a^b;//b=101,变成了a的值
+	a=a^b;//a=011,变成了b的值
+	printf("%d\n%d\n",a,b);
+	return 0;
+}
+#include<stdio.h>//求一个数在内存中的1的个数
+int main()       //即求其补码中1的个数,就是求一个二进制数的一的个数
+{
+	int num=-1;
+	int count=0;
+    while(num)
+	{
+		if(num%2==1)
+		num=num/2;
+		count++;
+		
+	}
+	printf("%d\n",count);
+	return 0;
+}
+上面那个代码有问题取5为死循环下面代码更为巧妙
+#include<stdio.h>
+int main()
+{
+	int num=-1;
+	int count=0,i=0;
+	for(i=0;i<32;i++)//由于数字由32位二进制组成求的是补码的1的个数
+	{
+		if(num>>i&1==1)//双目运算符优先级比单目运算符更高，所以不需要加（）先算右移
+			count++;   
+	}
+	printf("%d\n",count);
+	return 0;
+}
+#include<stdio.h>
+int main()
+{
+	int arr[10]={0};
+	printf("%d\n",sizeof(arr));
+	printf("%d\n",sizeof(int [10]));
+	printf("%d\n",sizeof(int [5]));
+	return 0;
+}
+#include<stdio.h>
+int main()
+{
+	short s=0;
+	int a=10;
+	printf("%d\n",sizeof(short));
+	printf("%d\n",sizeof(s=5+a));
+	printf("%d\n",s);
+	return 0;
+}
+
+
+#include<stdio.h>
+int main()
+{
+	int i=0,a=1,b=2,c=3,d=4;
+	i=a++&&b++&&d++;//全为真才为真，都要进行运算，建立在a!=0的基础上 
+	i=a++||b++||d++;//有一个为真其他的都为真，有真就不用算后面的，b++,d++都不算
+	printf("%d\n%d\n%d\n%d\n",a,b,c,d);
+	return 0;
+}
+#include<stdio.h>
+int main()
+{
+	int a=1,b=2;
+	int c=1;
+	c=(a=a+b,b=2*a,c*b);
+	printf("%d\n",c);
+	return 0;
+}
+
+#include<stdio.h>
+int main()
+{
+    char a=3;
+	char b=127;
+	char c=a+b;
+	printf("%d\n",c);
+	return 0;
+}

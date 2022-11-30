@@ -1514,3 +1514,53 @@ int main()
 	printf("%d\n",c);
 	return 0;
 }
+#define _CRT_SECURE_NO_WARNINGS 1
+#include<stdio.h>
+int main()
+{
+    char a=3;
+	char b=127;
+	char c=a+b;
+	printf("%d\n",c);
+	return 0;
+}
+#include<stdio.h>
+int main()
+{
+	int i=0;
+	int arr[10]={0};
+	int* p=arr;
+	//char* p=arr;
+	for(i=0;i<10;i++)
+	{
+		*(p+i)=1;
+		printf("%d\n",arr[i]);
+	}
+	return 0;
+}
+#include<stdio.h>
+#include<math.h>
+int main()
+{
+	int n=0,arr[10000]={0};
+	int i=0,j=0,pp=0;
+	scanf("%d",&n);
+	for(i=2;i<sqrt(n);i++)
+	{
+		if(n%i==0)
+		{
+			pp=i;
+			arr[j]=pp;
+			j++;
+		}
+	}
+if(j==2)
+{
+    if(arr[0]>arr[1])
+		printf("%d\n",arr[0]);
+	else
+		printf("%d\n",arr[1]);
+}
+	return 0;
+}
+

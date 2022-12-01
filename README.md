@@ -1564,3 +1564,67 @@ if(j==2)
 	return 0;
 }
 
+#include<stdio.h>
+int main()
+{
+	int arr[10]={0},i=0;
+	int* p=arr;
+	for(i=0;i<10;i++)
+	{
+		*(p+i)=i;
+	}
+	for(i=0;i<10;i++)
+	{
+		//printf("%d\n",arr[i]);
+		printf("%d\n",*(p+i));
+	}
+	return 0;
+}
+#include<stdio.h>//用指针求字符串数组字符的个数
+int my_strlen(char *str)
+{
+	char* start=str;
+	char* end=str;
+	while(*end!='\0')
+	{
+		end++;
+	}
+	return end-start;
+}
+int main()
+{
+	char arr[]="bit";
+	int len =my_strlen(arr);
+	printf("%d\n",len);
+	return 0;
+}
+#include<stdio.h>
+int main()
+{
+	int a=10;
+	int* pa=&a;
+	int** ppa=&pa;//二级指针
+	printf("%d\n",**ppa);
+	return 0;
+}
+#include<stdio.h>
+int main()
+{
+	int a=10,b=20,c=30,i=0;
+	int* pa=&a;
+	int* pb=&b;
+	int* pc=&c;
+	int* arr[3]={&a,&b,&c};//指针数组：存放指针的数组
+	for(i=0;i<3;i++)
+	{
+		printf("%d ",*(arr[i]));
+	}
+	return 0;
+}
+#include<stdio.h>
+int main()
+{
+	int arr[]={1,2,(3,4),5};
+	printf("%d\n",sizeof(arr));
+	return 0;
+}

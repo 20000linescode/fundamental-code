@@ -1628,3 +1628,84 @@ int main()
 	printf("%d\n",sizeof(arr));
 	return 0;
 }
+#include<stdio.h>
+//void Init(int arr[],int sz)//初始化为0
+//{
+//	int i=0;
+//	for(i=0;i<sz;i++)
+//	{
+//		arr[i]=0;
+//	}
+//}
+void Printf(int arr[],int sz)//打印
+{
+	int i=0;
+	for(i=0;i<10;i++)
+	{
+		printf("%d ",arr[i]);
+	}
+printf("\n");
+}
+void reserve(int arr[],int sz)//置换
+{
+	int left=0,right=sz-1;
+	int i=0,tmp=0;
+	while(left<right)
+	{
+		tmp=arr[left];
+	    arr[left]=arr[right];
+		arr[right]=tmp;
+	    left++;
+	    right--;
+	}
+}
+int main()
+{
+	int arr[10]={1,2,3,4,5,6,7,8,9,10};
+	int sz=sizeof(arr)/sizeof(arr[0]);
+	//Init(arr,sz);
+	Printf(arr,sz);
+	reserve(arr,sz);
+	Printf(arr,sz);
+	return 0;
+}
+#include<stdio.h>//数组交换
+void Printf(int arr[],int sz)//打印
+{
+	int i=0;
+	for(i=0;i<sz;i++)
+	{
+		printf("%d ",arr[i]);
+	}
+printf("\n");
+}
+int main()
+{
+	int arr1[]={1,3,5,7,9};
+	int arr2[]={2,4,6,8,10};
+	int tmp=0,i=0;
+	int sz=sizeof(arr1)/sizeof(arr1[0]);
+	for(i=0;i<sz;i++)
+	{
+		tmp=arr2[i];
+		arr2[i]=arr1[i];
+		arr1[i]=tmp;
+	}
+	Printf(arr1,sz);
+	Printf(arr2,sz);
+	return 0;
+}
+
+
+
+#include<stdio.h>
+int main()
+{
+	int a,b,c;
+	a=5;
+	c=++a;//c=6,a=6
+	b=++c,c++,++a,a++;//=的优先级大于，所以++a赋值给b，b=7，c=8,a=8
+	b+=a++ +c;//+的优先级大于+=，先算+：a=9,b=8+7+8=23
+	printf("a=%d b=%d c=%d\n",a,b,c);//9,23,8
+	return 0;
+}

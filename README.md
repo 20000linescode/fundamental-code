@@ -1709,3 +1709,101 @@ int main()
 	printf("a=%d b=%d c=%d\n",a,b,c);//9,23,8
 	return 0;
 }
+方法一:使用库函数进行逆序
+#include<string.h>
+void reverse_string(char arr[])//逆序打印字符串例如abcd,则打印dcba
+{
+	int a=strlen(arr);//strlen可以直接求出arr的字符个数不需要传参
+	char tmp;
+	int i=0;
+	int left=0,right=sz-1;
+	while(left<right)//若left=right则无需交换，因为指向了同一个元素
+	{
+		tmp=arr[left];
+		arr[left]=arr[right];
+		arr[right]=tmp;
+		left++;
+		right--;
+	}
+	for(i=0;i<sz;i++)//打印6个，sz=6
+	{
+		printf("%c ",arr[i]);
+	}
+	printf("%d\n",a);
+}
+方法2:使用递归的方法进行逆序
+void reverse_string(char arr[])
+{
+	char tmp=arr[0];
+	int len=strlen(arr);
+	arr[0]=arr[len-1];
+	arr[len-1]='\0';
+	if(strlen(arr)>=2)
+	reverse_string(arr+1);//当arr+1时数组下标应该为arr[1]然后进行交换
+	arr[len-1]=tmp;//交换完成后第一组
+}
+int main()
+{
+	char arr[]="abcdefg";
+	reverse_string(arr);
+	printf("%s\n",arr);
+	return 0;
+}
+#include<stdio.h>//任意数的各个位数之和
+//方法1:
+int DigitSum(int num)
+{
+	int i=0;
+	while(num)
+	{
+		i+=num%10;
+		num=num/10;
+	}
+	return i;
+}
+方法2:递归很神奇的东西
+int DigitSum(int num)
+{                    
+	if(num>9)//递归终止条件
+	{        //例如输入1729:第一次算1729的9，第二次172传入得到2，再传入17得到7最后剩下1
+		return DigitSum(num/10)+num%10;
+	}
+	else
+	{
+		return num;//当只剩下1的时候，1进入函数进行判断小于9返回1,所以递归得到值19
+	}
+}
+int main()//1729=1+7+2+9=19
+{
+	int num=0,sum=0;
+	scanf("%d",&num);
+	sum=DigitSum(num);
+	printf("sum=%d\n",sum);
+	return 0;
+}
+#include<stdio.h>//n的k次方递归
+double Pow(int n,int k)
+{
+	if(k<0)
+	{
+		return(1.0/Pow(n,-k));
+	}
+	else if(k==0)
+	{
+		return 1;
+	}
+	else
+	{
+		return n*Pow(n,k-1);//n的k次方递归
+	}
+}
+
+int main()
+{
+   double ret=0;
+   int n=0,k=0;
+   scanf("%d%d",&n,&k);
+   ret=Pow(n,k);
+   printf("%lf\n",ret);
+   return 0;
+}

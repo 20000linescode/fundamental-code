@@ -1807,3 +1807,72 @@ int main()
    printf("%lf\n",ret);
    return 0;
 }
+#include<stdio.h>
+typedef struct stu//定义一个结构体变量不占储存空间的大小
+{
+	char name[10];//在struct前加上一个typedef可以直接使用stu定义类型
+	int age[10];
+	char sex[10];
+	int tele[20];
+}stu;//需要加分号,直接使用stu定义类型要在{}加名字相当于将struct stu定义成stu
+int main()
+{
+	struct stu s1;//定义了一个结构体变量的类型，类似于int，此时开辟了空间
+	stu s2;
+	return 0;
+}
+#include<stdio.h>
+struct S
+{
+	int a;
+	char c;
+	char arr[20];
+    double d;
+};
+struct T
+{
+	char ch[10];
+	struct S s;
+	char *pc;
+};
+int main()
+{
+	char arr[]="hello world";
+	struct T t={"hehe",{100,'w',"hello bit",3.14}, arr};//嵌套结构体定义同样需要{}
+	printf("%s\n",t.ch);
+	printf("%s\n",t.s.arr);
+	printf("%s\n",t.pc);
+	printf("%d\n",t.s.a);
+	printf("%lf\n",t.s.d);
+	return 0;
+}
+#include<stdio.h>
+typedef struct stu
+{
+	char name[10];
+	int  age;//年龄是比较小用int即可
+	char sex[10];//性别是字符串也用字符数组存放
+	char tele[12];//电话号码比较长用字符类型数组存放使用""
+}stu;
+void print1(stu tmp)//结构体传参仍然需要定义一个结构体接收
+{
+	printf("%d\n",tmp.age);
+	printf("%s\n",tmp.name);
+	printf("%s\n",tmp.sex);
+	printf("%s\n",tmp.tele);
+}
+void print2(stu* s)//使用结构体指针接收，若未定义stu那么就要使用struct stu*接
+{
+	printf("%d\n",s->age);
+	printf("%s\n",s->name);
+	printf("%s\n",s->sex);
+	printf("%s\n",s->tele);
+}
+
+int main()
+{
+	stu s={"李四",10,"man","13133677362"};
+	print1(s);//传过去的是定义的s
+	print2(&s);//传递的是s的地址
+	return 0;
+}

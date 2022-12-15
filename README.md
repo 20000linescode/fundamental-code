@@ -1876,3 +1876,30 @@ int main()
 	print2(&s);//传递的是s的地址
 	return 0;
 }
+#include<stdio.h>
+int main()
+{
+	int i=0;
+	int arr[10]={1,2,3,4,5,6,7,8,9,10};
+	for(i=0;i<=12;i++)
+	{
+		printf("hehe\n");
+		arr[i]=0;
+	}
+	return 0;
+
+} 
+#include<stdio.h>
+int main()
+{
+	int i=0;
+	for(i=0;i<100;i++)
+	{
+		printf("%d ",i);
+	}
+	for(i=0;i<100;i++)
+	{
+		printf("%d ",10-i);//按下F9在此处打上断点按下F5直接跳到此处逻辑运算处
+	}
+	return 0;
+}

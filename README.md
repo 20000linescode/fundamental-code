@@ -1903,3 +1903,132 @@ int main()
 	}
 	return 0;
 }
+#define  _CRT_SECURE_NO_WARNINGS 1
+#include<stdio.h>
+int main()
+{
+	int i=0,sum=0,n=0,ret=1;
+	scanf("%d",&n);//3
+	for(i=1;i<=n;i++)//1，2，3
+	{
+		int j=0;ret=1;
+		for(j=1;j<=i;j++)
+		{
+			ret*=j;//ret未初始化为一
+		}
+		sum+=ret;
+	}
+	printf("%d\n",sum);
+	return 0;
+}
+#include<stdio.h>
+int main()
+{
+	int i=0;
+	int arr[10]={1,2,3,4,5,6,7,8,9,10};
+	for(i=0;i<=12;i++)
+	{
+		printf("hehe\n");
+		arr[i]=0;
+	}
+	return 0;
+}
+#include<stdio.h>//不高兴的津津
+int main()
+{
+	int a=0,b=0,i=0;
+    int max_time=0;
+	int arr[7]={0},count=0;
+	for(i=0;i<7;i++)
+	{
+		scanf("%d%d",&a,&b);
+		arr[i]=a+b;
+        if(arr[i]>8)
+			count++;
+		if(arr[i]>max_time)
+			max_time=arr[i];
+	}//将大于8的日期全部存储到了arr数组中
+	if(count==0)
+		printf("%d",count);
+	else
+	{
+		for(i=0;i<7;i++)
+		{
+			if(arr[i]==max_time)
+			{
+				printf("%d",i+1);
+				break;
+			}
+		}
+	}
+	return 0;
+}
+#include<stdio.h>
+#include<string.h>
+void my_strcpy(char* arr1,char* arr2)//写一个与strcpy一样功能的函数
+{
+    while(*arr2!='\0')//为'\0'才循环
+	{
+		*arr1=*arr2;//交换元素解引用
+		arr1++;//都自增找到下个元素地址
+		arr2++;
+	}
+	*arr1=*arr2;//当arr2为'\0'时，那么在交换一次，即完成了
+}
+void my_strcpy(char* arr1,char* arr2)//优化代码
+{
+	    while(*arr1++=*arr2++)//当传输为'b'时,()里面就是'b'，为真，直到为'\0'时，其ASCII码值为0，即程序停止
+	{
+		;
+	}
+}
+#include<assert.h>
+void my_strcpy(char* arr1,const char* arr2)//优化代码
+{
+	assert(arr1!=NULL);//断言，若为空指针会提醒错误在哪便于Debug
+	assert(arr2!=NULL);
+	    while(*arr1++=*arr2++)//当传输为'b'时,()里面就是'b'，为真，直到为'\0'时，其ASCII码值为0，即程序停止
+	{                         //当arr2放入arr1中时，即源作为接收时，则const会进行报错
+		;
+	}
+}
+int main()
+{
+	char arr1[]="#########";
+	char arr2[]="bit";
+	strcpy(arr1,arr2);//全部拷贝过去了包括\0，打印\0之前的元素虽然后面还有#但是不打印
+	my_strcpy(arr1,NULL);//用地址接受
+	printf("%s\n",arr1);
+	return 0;
+}
+#include<stdio.h>
+int main()
+{
+	const int num=10;
+	int n=100;
+	 //int*const p=&num;//限制了p但是没有限制*p,*p想改可以改变
+	const int* p=&num;
+	p=&n;
+	printf("%d\n",num);
+	return 0;
+}
+#include<stdio.h>
+#include<assert.h>
+int my_strlen(const char* arr)//注意加上const修饰
+{
+	int ret=0;
+	assert(arr!=NULL);//加上断言
+	while(*arr!='\0')
+	{
+		arr++;
+		ret++;
+	}
+	return ret;
+}
+int main()
+{
+	char arr[]="abcdef";
+	int len=my_strlen(arr);
+	printf("%d\n",len);
+	return 0;
+}

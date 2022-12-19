@@ -2032,3 +2032,88 @@ int main()
 	printf("%d\n",len);
 	return 0;
 }
+#define  _CRT_SECURE_NO_WARNINGS 1
+#include<stdio.h>
+void print(void)
+{
+	printf("hehe\n");
+}
+int main()
+{
+	print(100);//虽然无需接受参数，但是传参仍不报错
+	return 0;
+}
+#include<stdio.h>
+int main()
+{
+	int a=1;
+	//printf("%p\n",a);
+	char* p=(char*)&a;
+	if(*p==1)
+	{
+		printf("小端\n");
+	}
+	else
+	{
+		printf("大端\n");
+	}
+	return 0;
+}
+#include<stdio.h>
+int check_sys()
+{
+	int i=1;
+	return (*(char*)&i);
+}   //char*只能访问1个字节，即01处，解引用
+int main()
+{
+	int ret=check_sys();
+	if(ret==1)
+	{
+		printf("小端\n");
+	}
+	else
+	{
+		printf("大端\n");
+	}
+	return 0;
+}
+#include<stdio.h>
+int main()
+{
+    char a=-1;
+    //10000000000000000000000000000001
+	//11111111111111111111111111111110
+	//11111111111111111111111111111111
+	//由于-1放入char中，所以只能放
+	//11111111
+	//打印int型进行整形提升，补符号位得
+	//11111111111111111111111111111111
+	signed char b=-1;
+	//11111111
+	//与上述相同所以：
+	//11111111111111111111111111111111
+	unsigned char c=-1;
+	//11111111
+	//无符号数高位补0
+	//00000000000000000000000011111111
+	//其为正数得到结果255
+	printf("a=%d,b=%d,c=%d",a,b,c);
+	return 0;
+}
+#include<stdio.h>
+int main()
+{
+	char a=-128;
+	//100000000000000000000000 10000000
+	//111111111111111111111111 01111111
+	//111111111111111111111111 10000000
+	//10000000
+	//111111111111111111111111 10000000
+	printf("%u\n",a);
+	//由于打印的是%u所以系统认为他是一个无符号整数，直接原反补相同得到
+	//111111111111111111111111 10000000
+	//%d-打印有符号数字
+	//%u-打印无符号数字
+	return 0;
+}

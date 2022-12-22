@@ -2145,3 +2145,43 @@ int main()
 	}
 	return 0;
 }
+#include<stdio.h>
+#include<string.h>
+int main()
+{
+	char a[1000];//char类型数组只能储存-128-127之间的数
+	int i;
+	for(i=0;i<1000;i++)
+	{
+		a[i]=-1-i;
+	}//-1~-1000
+	printf("%d",strlen(a));//strlen遇到'\0'停止，即是遇到字符0停止，根据循环圈得到结果
+	return 0;
+}
+#include<stdio.h>//死循环，因为达到256时，进入循环变成0，再一直进行循环
+unsigned char i=0;
+int main()
+{
+	unsigned char i=0;
+	for(i=0;i<=255;i++)
+	{
+		printf("hello world\n");
+	}
+	return 0;
+}
+#include<stdio.h>
+int main()
+{
+	double d=1E10;
+	1E10就是，1.0*10的10次方
+	printf("%lf\n",d);
+	printf("%d\n",sizeof(float));
+	int n=9;
+	float *pFloat=(float*)&n;
+	printf("%d\n",n);
+	printf("%f\n",*pFloat);
+	*pFloat=9.0;
+	printf("%d\n",n);
+	printf("%f\n",*pFloat);
+	return 0;
+}

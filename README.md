@@ -2185,3 +2185,184 @@ int main()
 	printf("%f\n",*pFloat);
 	return 0;
 }
+#include<stdio.h>
+int main()
+{
+	int n=9;
+	//0 00000000 00000000000000000000101-9补码
+	//
+	float *pFloat=(float*)&n;
+	printf("%d\n",n);//9
+	printf("%f\n",*pFloat);//0.000000
+	//(-1)^0*00000000000000000000101*2^-126无限接近0，所以得到结果打印为0
+	*pFloat=9.0;
+	//1001.0
+	//（-1）^0*1.001*2^3
+	//S=0 M=001 E=3->129
+	//0 10000001 00100000000000000000000
+	//上面的二进制数字转化为10进制则为1091567616
+	printf("%d\n",n);
+	printf("%f\n",*pFloat);//9.000000
+    return 0;
+}
+#include<stdio.h>
+int main()
+{
+	float a=5.5;
+	//5.5
+	//101.1
+	//(-1)^0*1.011*2^2
+	//S=0
+	//M=1.011
+	//E=2
+	//0 E+129 M
+	//0100 0000 1011 0000 0000 0000 0000 0000
+	//0x40b00000,此为a的地址
+	return 0;
+}
+#include<stdio.h>
+void test(int arr[])
+{
+	int ret=sizeof(arr)/sizeof(arr[0]);
+	printf("%d\n",ret);
+}
+int main()
+{
+	int arr[10]={0};
+	test(arr);
+	return 0;
+}
+#include<stdio.h>
+int main()
+{
+	const char* p="abcdef";//把"abcdef"看成一个常量字符串
+	printf("%c\n",*p);//存入的其实是首元素a
+	//*p='W';//这样的写法是错误的，存入了指针常量其值不能改变，要在char前加一个const
+	printf("%s\n",p);
+	return 0;
+}
+#include<stdio.h>
+int main()
+{
+	char arr1[]="abcdef";
+	char arr2[]="abcdef";
+	const char* p1="abcdef";
+	const char* p2="abcdef";
+	//if(arr1==arr2)//代表元素首地址，两个数组不同开辟的空间也不一样所以不相等
+	//{             //打印haha
+	//	printf("hehe\n");
+	//}
+	//else
+	//{
+	//	printf("haha\n");
+	//}
+    if(p1==p2)//同一个字符串所以首地址相同，打印hehe
+	{             
+		printf("hehe\n");
+	}
+	else
+	{
+		printf("haha\n");
+	}
+	return 0;
+}
+#include<stdio.h>
+int main()
+{
+	int arr1[]={1,2,3,4,5};
+	int arr2[]={2,3,4,5,6};
+	int arr3[]={3,4,5,6,7};
+	int* parr[]={arr1,arr2,arr3};//指针数组
+	int i=0,j=0;
+	for(i=0;i<3;i++)
+	{
+		for(j=0;j<5;j++)
+		{
+			printf("%d ",*(parr[i]+j));//parr[]为首元素地址+j向后遍历
+		}
+		printf("\n");
+	}
+   	return 0;
+}
+#include<stdio.h>
+int main()
+{
+	//int arr[10]={1,2,3,4,5,6,7,8,9,10};
+	//int (*p)[10]=&arr;//数组指针，还是指针
+	//int *p[10]={arr};//指针数组，这个是数组
+    char* arr[5];//指针数组
+	char*(*pa)[5]=&arr;//存放指针数组
+	//[5]代表指向的数组是五个元素的
+	int arr2[10]={0};//数组
+	int(*pa2)[10]=&arr2;//存放数组的指针
+	return 0;
+}
+#include<stdio.h>
+extern "C" void fd();
+extern "C" void fc();
+int x=0;
+int main()
+{
+	printf("%d\n",x);
+	 fd();
+	 fc();
+	x++;
+	printf("%d\n",x);
+	return 0;
+}
+#include<stdio.h>
+void print1(int arr[][5],int x,int y)//二维数组列不能少
+{
+	int i=0,j=0;
+	for(i=0;i<x;i++)
+	{
+		for(j=0;j<y;j++)
+		{
+			printf("%d ",arr[i][j]);
+		}
+		printf("\n");
+	}
+}
+void print2(int (*p)[5],int x,int y)//传的是第一行的地址，即第一行所有元素的地址
+{                                   
+	int i=0,j=0;
+	for(i=0;i<x;i++)//代表行，三行，
+	{
+		for(j=0;j<y;j++)///代表列，5列
+		{
+			printf("%d ",*(p[i]+j));
+		}
+		printf("\n");
+	}
+}
+int main()
+{
+	int arr[3][5]={{1,2,3,4,5},{2,3,4,5,6},{3,4,5,6,7}};
+	print1(arr,3,5);
+	print2(arr,3,5);
+	return 0;
+}
+#include<stdio.h>
+int main()
+{
+	int arr[10]={1,2,3,4,5,6,7,8,9,10};
+	int i=0;
+	int (*p)[10]=&arr;
+	for(i=0;i<10;i++)
+	{
+		printf("%d ",*(arr+i));//此四者等价
+		printf("%d ",arr[i]);
+		printf("%d ",*(p+i));
+		printf("%d ",p[i]);
+	}
+	return 0;
+}
+#include<stdio.h>
+int main()
+{
+	int arr[5];//存放了5个int类型的数组
+	int *parr1[10];//parr1是一个数组，存放10个int*指针类型的数组
+	int (*parr2)[10];//是一个指针，指向了一个数组，该数组为10个元素，每个元素为int型
+	int (*parr3[10])[5];//是一个数组，该数组有十个元素，每个元素都是一个数组指针，该数组指针指向的数组有5个元素，每个元素都是int型
+	return 0;
+}

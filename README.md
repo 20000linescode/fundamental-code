@@ -2461,3 +2461,195 @@ int main()
 	}
 	return 0;
 }
+#define  _CRT_SECURE_NO_WARNINGS 1
+#include<stdio.h>
+void test1(int (*arr)[5])//三行五列传递的是第一行的地址
+{}                       //*arr代表是一个指针，【5】则表示是一个5个元素的数组
+void test2(int arr[][5])//传参时只可以省略行。不可以省略列。
+{}
+int main()
+{
+	int arr[3][5]={0};
+	test1(arr);//二维数组传参，传递地址，也可直接传递各个元素用二维数组接收
+	test2(arr);
+	return 0;
+}
+#include<stdio.h>
+void test(int **ptr)
+{}
+int main()
+{
+	int *p;
+	int **pp=&p;
+	test(&p);//二级指针传参无非就是两种情况：1.传递一级指针的地址
+	test(pp);//2.传递二级指针
+	int* arr[10]={0};
+	test(arr);//还有一种特殊即传递指针数组的首地址，用二级指针接收
+	return 0;
+}
+#include<stdio.h>
+int Add(int a,int b)
+{
+	int z=0;
+	z=a+b;
+	return z;
+}
+int main()
+{
+	//int a=2,b=3;
+	//Add(a,b);
+	//printf("%p\n",Add);
+	//printf("%p\n",Add);
+	int (*pa)(int,int)=Add;
+	printf("%d\n",(*pa)(2,5));
+	return 0;
+}
+(*(void(*)())0)();//将0强制类型转换为void(*)()此为函数指针，即此时的0是一个函数指针，再进行解引用
+                  就是调用以0为地址的该函数，句末的（）即为函数调用
+void(*signal(int,void(*)(int)))(int);//signal是函数名，signal(int,void(*)(int))代表接受的类型为int和函数指针void(*)(int)
+                                     //剩下的就是void(*)(int),代表返回类型为void(*)(int)的函数指针，
+                                     //即返回类型为void,参数为int
+//可以对上述函数进行简化即
+typedef void(* pfun_t)(int)//用typedef将
+pfun_t signal( int, pfun_t)
+#include<stdio.h>
+int Add(int x,int y)
+{
+	int z=0;
+	z=x+y;
+	return z;
+}
+int main()
+{
+	int (*p)(int,int)=Add;
+	printf("%d\n",(p)(2,3));//对于函数指针来说*有或者没有都不影响结果，但是有意义
+	printf("%d\n",(*p)(2,3));//加不加，加几个都不影响结果都是5
+	printf("%d\n",(**p)(2,3));
+	printf("%d\n",(***p)(2,3));
+	return 0;
+}
+#include<stdio.h>
+int Add(int x,int y)
+{
+	return x+y;
+}
+int Sub(int x,int y)
+{
+	return x-y;
+}
+int Mul(int x,int y)
+{
+	return x*y;
+}
+int Div(int x,int y)
+{
+	return x/y;
+}
+
+int main()
+{
+	int i=0;
+	//int* arr[5];//此为指针数组，存放指针的数组，
+	int(*parr[4])(int,int)={Add,Sub,Mul,Div};//函数指针的数组，即为存放函数指针的数组
+	for(i=0;i<4;i++)
+	{
+		printf("%d\n",parr[i](2,3));
+	}
+	return 0;
+}
+#include<stdio.h>
+int main()
+{
+	char* my_strcpy(char* dest,const char* src);//const不能丢
+	char* (*pf)(char*,const char*);//函数指针
+	char* (*pfArr[10])(char*,const char*)={my_strcpy};//函数指针数组
+	return 0;
+}
+#include<stdio.h>
+void menu()
+{
+	printf("******************\n");
+	printf("** 1.Add  2.Sub **\n");
+	printf("** 3.Mul  3.Div **\n");
+	printf("** 5.Xor  0.exit**\n");
+	printf("******************\n");
+}
+int Add(int x,int y)
+{
+	return x+y;
+}
+int Sub(int x,int y)
+{
+	return x-y;
+}
+int Mul(int x,int y)
+{
+	return x*y;
+}
+int Div(int x,int y)
+{
+	return x/y;
+}
+int Xor(int x,int y)
+{
+	return x^y;
+}
+int main()
+{  //parr是一个函数指针数组--也叫转移表，引用以后直接转移到某个函数中了
+	int(*parr[])(int,int)={0,Add,Sub,Mul,Div,Xor};//此处[]里可以直接不给元素,方便加元素上去
+	int input=0,x=0,y=0;
+	do
+	{
+		menu();
+		printf("请选择一个数\n");
+	    scanf("%d",&input);
+		if(input==0)
+		{
+			printf("退出\n");
+		}
+		else if(input>=1&&input<=4)
+		{
+	       printf("请输入两个操作数\n");
+	       scanf("%d%d",&x,&y);
+	       printf("%d\n",parr[input](x,y));
+		}
+		else
+		{
+			printf("选择错误，请重新选择\n");
+		}
+	}while(input);
+	return 0;
+}
+int main()//第一种虽然能够达到效果，但是加入另一种算法不够方便
+{
+	int input=0;
+	int x=0,y=0,ret=0;
+	do
+	{
+		menu();
+		printf("请选择:>");
+		scanf("%d",&input);
+		if(input!=0)
+	{
+		printf("输入两个操作数:\n");
+		scanf("%d%d",&x,&y);
+		switch(input)
+		{
+		   case 1:printf("%d\n",Add(x,y));
+			   break;
+		   case 2:printf("%d\n",Sub(x,y));
+			   break;
+		   case 3:printf("%d\n",Mul(x,y));
+               break;
+		   case 4:printf("%d\n",Div(x,y));
+			   break;
+		   default:
+			   printf("选择错误，请重新选择\n");
+			   break;
+		}
+	}
+		else printf("退出\n");
+	}
+	while(input);
+	return 0;
+}

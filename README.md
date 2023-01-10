@@ -2653,3 +2653,45 @@ int main()//第一种虽然能够达到效果，但是加入另一种算法不�
 	while(input);
 	return 0;
 }
+#include<stdio.h>
+int main()
+{
+	int arr[10]={0};//整形数组
+	int (*p)[10]=&arr;//数组指针
+	int (*pfArr[4])(int,int);//函数指针数组--它是一个数组那么肯定有一个指针能够存放他的地址
+	//指向函数指针数组的指针--存放pfArr的地址
+	int (*(*ppfArr)[4])(int,int)=&pfArr;
+	//ppfArr是一个指针数组，指向的数组有四个元素
+	//指向函数指针数组的类型是int(*)(int , int)
+	return 0;
+}
+#include<stdio.h>
+//void print(char arr[])
+void print(char* str)//char*类型可用于接收字符串--char arr[]
+{
+	printf("hehe:%s\n",str);
+}
+void test(void(*p)(char*))//test接收的是print函数，使用test调用p时，就是调用print函数
+{
+	printf("test\n");
+	p("bit");//输入所要接收的字符串
+}
+int main()
+{
+	test(print);
+	return 0;
+}
+#include<stdio.h>
+void print(char* str)
+{
+	printf("%s\n",str);
+}
+int main()
+{
+	//int a;
+	//int* pa;
+	void (*p)(char*)=print;
+	(*p)("hello bit");
+	 p("hello bit");//加不加*不影响结果
+	return 0;
+}

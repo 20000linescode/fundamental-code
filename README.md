@@ -2695,3 +2695,69 @@ int main()
 	 p("hello bit");//加不加*不影响结果
 	return 0;
 }
+#include<stdio.h>
+int main()
+{
+	int a=10;
+	char b='a';
+	void* p=&a;
+	void* c=&b;//1.void* 类型的指针为无类型指针，char ,int都能存放，即可以接受任意类型的指针
+	           //2.void* 类型的指针不能进行解引用操作
+	           //3.void* 类型的指针不能进行加减整数的操作
+	//*p=1;
+	p=&b;
+	printf("%c\n",p);
+	return 0;
+}
+#include<stdio.h>
+#include<stdlib.h>
+//void qsort(void* base,size_t num,size_t width,int ( *cmp)(const void*,const void*));
+//int (*cmp)(const void* e1,const void* e2),为函数指针，接受的是函数
+int cmp_int(const void* e1,const void* e2)//接受两个整形指针进行比较
+{
+//由于接受的是两个无类型的指针可以用强制类型转换成int*的指针再进行解引用操作，即可找到两个整数
+//规定返回的是e1>e2返回>0数
+//e1=e2返回=0
+//e1<e2返回<0
+		return *(int*)e1-*(int*)e2;
+}
+void test1()
+{
+	int i=0;
+	int arr[10]={9,8,7,6,5,4,3,2,1,0};
+	int sz=sizeof(arr)/sizeof(arr[0]);
+	qsort(arr,sz,sizeof(arr[0]),cmp_int);//只需要引头文件stdlib.h即可
+	for(i=0;i<sz;i++)
+	{
+		printf("%d ",arr[i]);
+	}
+}
+int main()
+{
+	test1();
+	return 0;
+}
+#include<stdio.h>
+#include<stdlib.h>
+int cmp_float(const void* e1,const void* e2)//使用qsort函数的时候的返回值一定要使用int类型，不能使用float,否则报错
+{                                           //float类型相加减同样满足qsort的要求，即<0 =0 >0.
+	//return *(float*)e1-*(float*)e2;       //此为比较浮点型
+	return (int)(*(float*)e1-*(float*)e2);  //把结果（即用()将相减的结果括起来）进行强制类型转换为int也一样能够满足<0 =0 >0.
+}                                           
+
+void test2()
+{
+	int i=0;
+	float farr[10]={9.0,8.0,7.0,6.0,5.0,4.0,3.0,2.0,1.0,0.0};
+	int sz=sizeof(farr)/sizeof(farr[0]);
+	qsort(farr,sz,sizeof(farr[0]),cmp_float);
+		for(i=0;i<sz;i++)
+	{
+		printf("%0.2lf ",farr[i]);
+	}
+}
+int main()
+{
+	test2();
+	return 0;
+}

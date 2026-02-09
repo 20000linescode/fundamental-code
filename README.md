@@ -1,5 +1,45 @@
 # fundamental-code
 C语言日常基础
+
+## 冒泡排序（C 语言示例）
+
+```c
+#include <stdio.h>
+
+void bubble_sort(int arr[], int sz)
+{
+    int i = 0;
+    int j = 0;
+    for (i = 0; i < sz - 1; i++)
+    {
+        for (j = 0; j < sz - i - 1; j++)
+        {
+            if (arr[j] > arr[j + 1])
+            {
+                int tmp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = tmp;
+            }
+        }
+    }
+}
+
+int main(void)
+{
+    int arr[] = {10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
+    int sz = sizeof(arr) / sizeof(arr[0]);
+    int i = 0;
+
+    bubble_sort(arr, sz);
+
+    for (i = 0; i < sz; i++)
+    {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
+    return 0;
+}
+```
 #include<stdio.h>//if的多重语句
 int main()
 {
